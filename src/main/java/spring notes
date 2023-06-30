@@ -1,0 +1,190 @@
+ Spring Boot It is not a part of spring It is completely different
+   spring boot use to create  restful  api
+   ->It is a java framework which use to create Restful API's/develop
+   ->It is used to internally 
+    WEB APPLICATION                    ||         WEB SERVICES 
+ 1->  
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*Spring Boot ->
+=>IT is a java Framework which is used to create/devlop REST Apis.
+=>It uses Spring Internally
+
+*web Application :-
+=>These are complete application from scratch till end having all the functionally required for the application
+  
+ * Web Services:-
+ =>These are services provides by one application to another application,in such a way that  the application can use a services/functionality of 
+ the service provider by integrating it's APIs.
+ =>It follows client-server model. the one which provides some operational functionality is called as service provider(server) and the one who 
+ consumes/uses the functionality is knows as client.
+ ex:- Goibibo is an webApplication which uses webServices provided by the (Indigo,AirAsia,Emirates etc ) by integrating APIS provided by them.So, we can book 
+ for any of these flights without even going to there specific booking sites.
+ 
+ Flipkart is an WebApplications which uses the webServices provided by many banking sites(SBI,PNB,Axis etc), in order to use their payment gateways inside its own application.
+    
+    
+   *Rest APIs:- 
+   =>It stand for Representational State Transfer
+   =>It uses standard HTTP methods (Post,Get,Put,Delete) in order to interact with resources.
+   POST    - save/persist the data 
+   GET     - find/fetch the data
+   PUT     - update/merge the data 
+   Delete  - delete/remove the data
+   
+   =>Rest APIs uses JSON or XML format in order to represents the data.
+   ->these are stateLess and highly scalable.
+   ->stateLess - the word statement means that no data/information will be saved for the previous requests.
+   Every requests will be treated as new request.
+   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//Optional -> it is a genric class present inside the java.util package, To avoid exception when the object is not found we will use this class,It accepts as a <type attribute>.
+//is empty() and present()=> these are methods present inside optional classes by which we can check if the data is present or not
+// get() -> this will return the object found
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Service Layer
+->service layer will be containg all the layers of our application
+->It will have a referance of data @Autowired inside it so that
+             we can call methods of dao inside service
+->and service layer is the are which will be directly connected to own 
+
+It will hold all the Logics
+
+**--steps to create springboot Application --**
+1-> go to spring intialization on the browser
+2->select to the type of you want to create project type maven--language java--spring version--2.7.12
+3->give the group id and artificial id and base package name
+4->select the java version
+5->all the required depandencies *spring web,spring data jpa,spring boot dev Tools,my sql
+ 
+ Genrated the project 
+ 
+ * Service Layer
+   --------------
+   6->extract all the zip file thet was ganrated
+   7->Import the project from your IDE
+       FILE-- Import ->Browse the file ---select -- ok
+       
+ * STEPS OF PACKAGE CREATE AND INFORMATE IN
+   -----------------------------------------
+   1->create s diffrent packages from diffrent layers on main if required
+       .dto  -- the package will have all the  existing classes
+       .repo -- this package will have an interface which extends JPA repository
+       .dao -- this package will have dao classes having database implimentaion
+       service -- this package will have all the oprational and excuteional logic 
+       controller -- this package will have controller  classes with all the request modification
+       
+    2-> after every layer created,run your appliucation and use  postman to test your API's
+    
+    
+    @Annotaions used in difrrent classes
+    DAO->@Entity @Component
+    Repo->none
+    DAO->@repository
+    service->@service 
+    controller->@RequestController,@RequestMapping("/")
+    
+    # ResponceEntity<T>
+    ->It is a genric class which will give the response as specific http structure code and body
+    ->It is Http Specific
+    ->It table a class as a parameter 
+       -->responceStructure<T>
+   ->It is predefining class
+   ->It is also a genric class created by the programer will acepts  a class as parameter 
+   ->which sending a responce it will be addead inside the responce entity to send praper
+             -->http status code  -(int)
+             -->message   -(String)
+             -->data   -(Object)
+             
+###############################################################################################################################             
+             <extra knowlede>
+            public enum Example{
+               Found,   //every time can i found created found only because example.found student not null 
+               CREATED, 
+               OK
+             }
+###############################################################################################################################
+   CREATED -> If succefully saved 
+              Found -> succefully  found/fetched
+              OK -> if updated succefully 
+              oK -> if Deleted Succefully 
+              
+              if(option.isEmpty){
+              return null;
+              }
+              else 
+              {
+              student student= optional.get() ->(It responce a student object)
+              ResponceStructure .setStudents(Httpstatus.found.value()); -(it returns int)
+      |-------responceStructure.setmessage("student Found!!")-(returns.String)
+      |       responceStructure setData(student)-(return object type data)
+      |       return new ResponseEntity<ResponceStructure<Student>>(responceStructure,HttpStatus.FOUND);->|
+      |                                                                                                   |
+      |       }                   																		  |
+      |       																							  |
+      |       //this all to create responce perticular http responce error like 200(404 ERROR) after comp | lete this get it perticular responce 201
+      |       																							  |
+      |       																							  |		
+      |------>this responce is to select to show a proper												  |
+              status code , message , Data 																  |
+              inside the body , if the transction /opration is succefully								  |
+                                                                                               			  |
+              this responce  entity is to implement the responce<strcture> -------------------------------<	
+              and show the httpstatus and http status code in the border
+              
+              
+  *************************************************************************************************************************************
+ 
+           Exception handling in springBoot 
+           --------------------------------
+               ->when ever we are giving a request a meesage for a mapping it comes and hit in the retrives present  inside the 
+               controller class and the respective service layer to excute the logic .
+               ->It the method inside service is successfully executed, it will return a ResponseEntity<ResponceStructure<Class-name>>(responceStructuree.httpStatus);
+               ->If the method is not successfully executed,it should be throw on custom exception created by us. with a message
+               
+               -> after we create on exception we should also create are exception handle class to handle the exception by passing the proper message to the end user
+               * Annotation used in Exception class
+                -------------------------------------
+                @RestControllerAdvice
+                ->It is class level annotation used over the exception class in order to specifying that It is a one of own utility class to handle the exception.
+                
+                @ExceptionHandel
+                ->It is a method level exception used ever the methods present inside the exception classes which are declared to handle custom exception crested by us.
+                ->For each custome exception  created , there will a method to handle that with pages RequestStructure
+                
+                
+                ""* It is used to document restful api *""
+                              
+                              
+    ***************************************************************************************************************************************
+    23-06-2023 in this class taken raju sir 
+    after this add dependency "springfox-swagger2" ,"springfox-swagger-ui"
+    after go to the config package after create a class "Applicationconif.java"
+    inside to use 
+    
+    @Configuration
+    @EnableSwagger2
+    @Bean
+    Docket --> it is helps to documentation of restful api 
+	  
+	  Contact contact=new Contact("charan", "", "charan@gmail.com");// it is  a documentation service layer it is helps name url email is inside used
+	  List<VendorExtension> extensions=new ArrayList<VendorExtension>();
+	  ApiInfo apiInfo= new ApiInfo("Student-management-system",
+			  "this is a rest API built on spring boot",
+			  "It is used to manage the student details ",
+			  "1.0Final", contact, "", "", extensions);
+	  return new Docket(DocumentationType.SWAGGER_2).select()
+			     .apis(RequestHandlerSelectors.
+					  basePackage("com.jsp.studentboot") ).build()
+               .apiInfo(apiInfo).useDefaultResponseMessages(false);   
+}
+}
+
+======================================================================================================================================================
+Field Validation:-
+****************
+     -> Field Validation  are configuration added to the variable/fields/attribution of the entity classes in order to be proper
+        values required for the fields in the application
+     -> There are different find of validation that can be able to be used for a single field as and when required.
+     
+                       
